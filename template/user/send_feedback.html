@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback</title>
+  <link rel="stylesheet" href="/static/icon/icofont.min.css">
+
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #a8e063, #56ab2f);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column; /* stack nav + form vertically */
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    nav {
+      width: 100%;
+    }
+
+    form {
+      background: #fff;
+      padding: 30px 25px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      width: 400px;
+      max-width: 90%;
+      text-align: center;
+      margin-top: 40px; /* space below nav */
+      margin-bottom: 40px;
+    }
+
+    form h2 {
+      margin-bottom: 20px;
+      color: #1b4332;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+
+    textarea {
+      width: calc(100% - 24px); /* full width with padding */
+      min-height: 100px;
+      border: 2px solid #40916c;
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 15px;
+      outline: none;
+      resize: none;
+      margin-bottom: 20px;
+      display: block;
+      box-sizing: border-box;
+    }
+
+    textarea:focus {
+      border-color: #2d6a4f;
+      box-shadow: 0 0 6px #2d6a4f;
+    }
+
+    .icon-holder {
+      margin: 15px 0;
+      text-align: center;
+    }
+
+    .icon i {
+      font-size: 35px;
+      color: #ccc;
+      cursor: pointer;
+      transition: color 0.3s;
+      margin: 0 4px;
+    }
+
+    .icon i.active {
+      color: rgb(255, 223, 0); /* golden yellow */
+    }
+
+    button {
+      background: #2d6a4f;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background: #40916c;
+    }
+
+    @media (max-width: 450px) {
+      form {
+        width: 90%;
+        padding: 25px;
+      }
+      textarea {
+        width: calc(100% - 24px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Extend nav.html -->
+  {% include 'user/user_nav.html' %}
+
+  <form action="/myapp/send_feedback_post/" method="post">
+    {% csrf_token %}
+    <h2>Give Your Feedback</h2>
+    <textarea name="feedback" placeholder="Write your feedback here..."></textarea>
+
+    <div class="icon-holder">
+      <div class="icon">
+        <i class="icofont-ui-rating" onclick="toggleStar(this,1)"></i>
+        <i class="icofont-ui-rating" onclick="toggleStar(this,2)"></i>
+        <i class="icofont-ui-rating" onclick="toggleStar(this,3)"></i>
+        <i class="icofont-ui-rating" onclick="toggleStar(this,4)"></i>
+        <i class="icofont-ui-rating" onclick="toggleStar(this,5)"></i>
+      </div>
+    </div>
+
+    <input type="hidden" name="star" id="star">
+    <button type="submit">Enter</button>
+  </form>
+
+  <script>
+    function toggleStar(el, index) {
+      // Toggle all stars up to clicked
+      const stars = document.querySelectorAll(".icon i");
+      stars.forEach((star, i) => {
+        if(i < index){
+          star.classList.add("active");
+        } else {
+          star.classList.remove("active");
+        }
+      });
+
+      // Count active stars
+      const activeStars = document.querySelectorAll(".icon i.active").length;
+      document.getElementById('star').value = activeStars;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart Form</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #a8e063, #56ab2f);
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .cart-container {
+      background: #fff;
+      padding: 40px 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      width: 350px;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .cart-container:hover {
+      transform: scale(1.02);
+    }
+
+    .cart-container h2 {
+      margin-bottom: 20px;
+      color: #2e7d32;
+    }
+
+    label {
+      font-size: 16px;
+      font-weight: 600;
+      color: #388e3c;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin: 15px 0 25px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    input[type="number"]:focus {
+      border-color: #43a047;
+      box-shadow: 0 0 6px rgba(67, 160, 71, 0.5);
+    }
+
+    .btn {
+      display: inline-block;
+      background: #43a047;
+      color: #fff;
+      padding: 12px 20px;
+      margin: 5px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #2e7d32;
+    }
+
+    .btn-secondary {
+      background: #8bc34a;
+    }
+
+    .btn-secondary:hover {
+      background: #689f38;
+    }
+  </style>
+</head>
+<body>
+  <div class="cart-container">
+    <h2>🛒 Add to Cart</h2>
+    <form action="/myapp/cart_post/" method="post">
+      {% csrf_token %}
+      <label for="quantity">Quantity</label>
+      <input type="number" name="quantity" id="quantity" min="1" required>
+
+      <br>
+      <button type="submit" class="btn">Add</button>
+      <a href="/myapp/view_cart/" class="btn btn-secondary">View Cart</a>
+    </form>
+  </div>
+
+</body>
+</html>

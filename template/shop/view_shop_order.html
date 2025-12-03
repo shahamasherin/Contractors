@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop Orders</title>
+  <style>
+    /* Body & Header */
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #a8e063, #56ab2f);
+      margin: 0;
+      padding: 20px;
+      color: #081c15;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    header h1 {
+      margin-top: 20px;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #1b4332;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    }
+
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    }
+
+    thead {
+      background: #2d6a4f;
+      color: white;
+    }
+
+    thead th {
+      padding: 14px;
+      text-align: left;
+      font-size: 1rem;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid #ddd;
+      transition: background 0.3s ease;
+    }
+
+    tbody tr:hover {
+      background: #e9f7ef;
+    }
+
+    tbody td {
+      padding: 12px 14px;
+      font-size: 0.95rem;
+      color: #333;
+    }
+
+    .amount {
+      font-weight: bold;
+      color: #2d6a4f;
+    }
+
+    /* Status badges */
+    .status {
+      font-weight: bold;
+      padding: 6px 12px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      display: inline-block;
+      min-width: 90px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+    }
+
+    .status:hover {
+      transform: scale(1.05);
+    }
+
+    .status-pending {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .status-paid {
+      background: #cce5ff;
+      color: #004085;
+    }
+
+    .status-delivered {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .status-cancelled {
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    .no-orders {
+      text-align: center;
+      padding: 20px;
+      font-size: 1.1rem;
+      color: #333;
+    }
+
+    /* Link-style buttons */
+    .link-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      margin: 2px 0;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      transition: 0.3s;
+      color: white;
+    }
+
+    .link-btn.view {
+      background: #56ab2f;
+    }
+
+    .link-btn.view:hover {
+      background: #40916c;
+    }
+
+    .link-btn.confirm {
+      background: #1b4332;
+    }
+
+    .link-btn.confirm:hover {
+      background: #14532d;
+    }
+
+    .link-btn.reject {
+      background: #d62828;
+    }
+
+    .link-btn.reject:hover {
+      background: #a4161a;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Shop Orders</h1>
+  </header>
+
+  {% if data %}
+  <table>
+    <thead>
+      <tr>
+        <th>Customer</th>
+        <th>Date</th>
+        <th>Total Amount</th>
+        <th>Details</th>
+        <th colspan="2">Order</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in data %}
+      <tr>
+        <td>{{ i.USER.name }}</td>
+        <td>{{ i.date }}</td>
+        <td class="amount">₹{{ i.total_amount }}</td>
+        <td><a href="/myapp/view_shop_order_sub/{{i.id}}" class="link-btn view">View More</a></td>
+
+        {% if i.status == "paid" %}
+        <td>
+          <a href="/myapp/order_confirm/{{i.id}}" onclick="return confirm('Are you sure?')" class="link-btn confirm">Confirm</a>
+          <a href="/myapp/order_reject/{{i.id}}" onclick="return confirm('Are you sure?')" class="link-btn reject">Reject</a>
+        </td>
+        {% else %}
+        <td colspan="2">
+          {% if i.status == "Pending" %}
+            <span class="status status-pending">{{ i.status }}</span>
+          {% elif i.status == "paid" %}
+            <span class="status status-paid">{{ i.status }}</span>
+          {% elif i.status == "delivered" %}
+            <span class="status status-delivered">{{ i.status }}</span>
+          {% elif i.status == "cancelled" %}
+            <span class="status status-cancelled">{{ i.status }}</span>
+          {% else %}
+            <span class="status">{{ i.status }}</span>
+          {% endif %}
+        </td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+    <div class="no-orders">No orders found.</div>
+  {% endif %}
+</body>
+</html>

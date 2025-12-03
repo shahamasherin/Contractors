@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Work</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #a8e063, #56ab2f);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .form-container {
+      background: #fff;
+      padding: 25px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      width: 350px;
+      text-align: center;
+    }
+
+    .form-container h3 {
+      margin-bottom: 20px;
+      font-size: 22px;
+      font-weight: bold;
+      color: #2d6a4f;
+    }
+
+    .form-container label {
+      display: block;
+      text-align: left;
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      margin: 8px 0 4px;
+    }
+
+    .form-container input[type="text"],
+    .form-container input[type="number"],
+    .form-container input[type="file"] {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+      font-size: 14px;
+      margin-bottom: 12px;
+      transition: 0.3s;
+    }
+
+    .form-container input:focus {
+      border-color: #2d6a4f;
+      box-shadow: 0 0 5px rgba(45, 106, 79, 0.4);
+    }
+
+    .form-container button {
+      background: #2d6a4f;
+      color: white;
+      font-weight: bold;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.3s;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .form-container button:hover {
+      background: #1b4332;
+    }
+
+    /* Preview Image */
+    .preview-img {
+      display: block;
+      margin: 10px auto 15px;
+      max-width: 150px;   /* control width */
+      max-height: 150px;  /* control height */
+      object-fit: cover;  /* crop if needed */
+      border-radius: 10px;
+      border: 2px solid #ccc;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="form-container">
+    <h3>Edit Work</h3>
+
+    <form action="/myapp/edit_contractor_work_post/" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <label for="item">Work name</label>
+      <input type="text" name="work_name" value="{{data.work_name}}" id="item" required>
+
+      <label for="image">Current Photo</label>
+      <img src="{{data.photo.url}}" alt="Current Work Image" class="preview-img">
+
+      <label for="image">Upload New Photo (optional)</label>
+      <input type="file" name="image" id="image">
+
+      <label for="details">Details</label>
+      <input type="text" name="description" value="{{data.description}}" id="description">
+
+      <label for="rate">Rate</label>
+      <input type="number" name="rate" value="{{data.rate}}" id="rate">
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</body>
+
+</html>

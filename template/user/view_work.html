@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Available Works</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #a8e063, #56ab2f);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      color: #081c15;
+    }
+
+    nav {
+      width: 100%;
+    }
+
+    header h1 {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #1b4332;
+      margin: 30px 0 20px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+      max-width: 1100px;
+      width: 90%;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+      border-left: 6px solid #2d6a4f;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 18px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      color: #1b4332;
+      font-size: 1.2rem;
+    }
+
+    .card h3.rate {
+      color: #27ae60;
+      font-size: 1.1rem;
+      margin-top: 5px;
+    }
+
+    .card h5 {
+      color: #444;
+      font-weight: normal;
+      line-height: 1.4;
+      margin: 12px 0 18px;
+    }
+
+    .btn-book {
+      display: block;
+      text-align: center;
+      padding: 12px;
+      border-radius: 8px;
+      background: #2d6a4f;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease;
+      margin-bottom: 8px;
+    }
+
+    .btn-book:hover {
+      background: #1b4332;
+    }
+
+    .btn-status {
+      display: block;
+      text-align: center;
+      padding: 10px;
+      border-radius: 8px;
+      background: #95d5b2;
+      color: #081c15;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .btn-status:hover {
+      background: #74c69d;
+    }
+
+    .no-works {
+      text-align: center;
+      color: #fff;
+      font-weight: bold;
+      grid-column: 1/-1;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Include nav -->
+  {% include 'user/user_nav.html' %}
+
+  <header>
+    <h1>Available Works</h1>
+  </header>
+
+  <div class="card-container">
+    {% for i in data %}
+    <div class="card">
+      <img src="{{ i.photo.url }}" alt="Work Image">
+      <div class="card-content">
+        <div>
+          <h3>{{ i.work_name }}</h3>
+          <h3 class="rate">₹{{ i.rate }}</h3>
+          <h5>{{ i.description }}</h5>
+        </div>
+        <a href="/myapp/send_work_request/{{ i.id }}" class="btn-book"
+          onclick="return confirm('Are you sure?')">Request</a>
+        <a href="/myapp/user_view_request_status/{{ i.id }}" class="btn-status">Request Status</a>
+      </div>
+    </div>
+    {% empty %}
+    <p class="no-works">No works available.</p>
+    {% endfor %}
+  </div>
+
+</body>
+
+</html>

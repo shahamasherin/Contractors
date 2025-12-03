@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout</title>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #a8e063, #56ab2f);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      background: #fff;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #1b4332;
+    }
+
+    .amount-box {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 25px;
+      color: #2d6a4f;
+    }
+
+    #pay-button {
+      background: #ff6b6b;
+      color: #fff;
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    #pay-button:hover {
+      background: #d62828;
+    }
+
+    footer {
+      margin-top: 20px;
+      font-size: 13px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Secure Payment</h2>
+    <div class="amount-box">
+      Pay ₹{{ amount|floatformat:2 }}
+    </div>
+    <button id="pay-button">Proceed to Payment</button>
+    <!-- <footer>Powered by Razorpay</footer> -->
+  </div>
+
+  <input type="hidden" value="{{ id }}" name="id">
+
+  <script>
+    var options = {
+      key: '{{ razorpay_api_key }}',
+      amount: '{{ amount }}',
+      currency: '{{ currency }}',
+      name: 'VehiMarket',
+      description: 'Purchase Description',
+      image: 'path_to_logo.png',
+      prefill: {
+        name: 'Your Name',
+        email: 'your_email@example.com',
+      },
+      theme: {
+        color: '#F37254',
+      },
+      handler: function(response) {
+        console.log(response);
+        alert('Payment successful' )
+        window.location='/myapp/user_home/'
+      },
+    };
+
+    var rzp = new Razorpay(options);
+
+    document.getElementById('pay-button').onclick = function () {
+      rzp.open();
+    };
+  </script>
+</body>
+</html>

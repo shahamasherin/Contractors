@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Send Complaint</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #a8e063, #56ab2f);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    nav {
+      width: 100%;
+    }
+
+    form {
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      width: 400px;
+      max-width: 90%;
+      text-align: center;
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #1b4332;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+
+    textarea {
+      width: calc(100% - 24px); /* account for padding */
+      min-height: 120px;
+      border: 2px solid #40916c;
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 15px;
+      outline: none;
+      resize: none;
+      margin: 0 auto 20px auto; /* center inside form */
+      display: block;
+      box-sizing: border-box; /* ensure padding included in width */
+    }
+
+    textarea:focus {
+      border-color: #2d6a4f;
+      box-shadow: 0 0 6px #2d6a4f;
+    }
+
+    button {
+      background: #2d6a4f;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #40916c;
+    }
+
+    @media (max-width: 450px) {
+      form {
+        width: 90%;
+        padding: 25px;
+      }
+      textarea {
+        width: calc(100% - 24px);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  {% include 'user/user_nav.html' %}
+
+  <form action="/myapp/send_complaint_post/" method="post">
+    {% csrf_token %}
+    <h2>Send Complaint</h2>
+    <textarea name="complaint" placeholder="Write your complaint here..."></textarea>
+    <button type="submit">Enter</button>
+  </form>
+
+</body>
+</html>

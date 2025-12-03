@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shoper Dashboard</title>
+    <style>
+        /* Body styles */
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #a8e063, #56ab2f);
+            margin: 0;
+            padding: 0;
+            color: #081c15;
+            text-align: center;
+        }
+
+        /* Navigation bar */
+        nav {
+            background: #2d6a4f;
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* List items inside nav */
+        nav li {
+            list-style: none;
+            display: inline-block;
+            position: relative;
+            /* Needed for dropdown positioning */
+        }
+
+        /* Links inside nav */
+        nav li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 8px;
+            transition: 0.3s;
+            display: block;
+        }
+
+        nav li a:hover {
+            background: #40916c;
+        }
+
+        /* Logout button */
+        nav li button {
+            background: #d62828;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        nav li button a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            display: block;
+        }
+
+        nav li button:hover {
+            background: #a4161a;
+        }
+
+        h3 {
+            margin-top: 50px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #1b4332;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Dropdown menu */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background: #2d6a4f;
+            top: 100%;
+            /* Below the parent link */
+            left: 0;
+            min-width: 180px;
+            border-radius: 6px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+            padding: 0;
+            margin: 0;
+        }
+
+        .dropdown-menu li {
+            display: block;
+            width: 100%;
+        }
+
+        .dropdown-menu li a {
+            padding: 12px 16px;
+            color: white;
+            text-align: left;
+            border-radius: 0;
+        }
+
+        .dropdown-menu li a:hover {
+            background: #40916c;
+        }
+
+        /* Show dropdown on hover */
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <li><a href="/myapp/contractor_view_product/">View Products</a></li>
+        <!-- <li><a href="/myapp/view_review_product/">View review products</a></li> -->
+
+        <li class="dropdown">
+            <a href="#">Work Manager ▾</a>
+            <ul class="dropdown-menu">
+                <li><a href="/myapp/add_contractor_work/">Add Work</a></li>
+                <li><a href="/myapp/view_contractor_work/">View Works</a></li>
+            </ul>
+        </li>
+
+        <li> <a href="/myapp/view_cart/" class="btn btn-secondary">View Cart</a>
+        </li>
+         <li> <a href="/myapp/view_work_request/" class="btn btn-secondary">Work request</a>
+        </li>
+        <li><button><a href="/myapp/logout/">Logout</a></button></li>
+    </nav>
+
+    <h3>Hi Contractor</h3>
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Choose Role</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #a8e063, #56ab2f); /* green theme */
+      margin: 0;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    h2 {
+      color: #fff;
+      margin-bottom: 30px;
+      font-size: 2rem;
+    }
+
+    .card {
+      background: #fff;
+      padding: 25px 40px;
+      margin: 15px 0;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+      width: 250px;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #2e4d1d;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+      background: linear-gradient(135deg, #e9f7ef, #d4efdf);
+      color: #1d3a0c;
+    }
+
+    .card:active {
+      transform: scale(0.97);
+    }
+  </style>
+</head>
+<body>
+  <h2>Hi</h2>
+
+  <div class="card" onclick="Contractor()">
+    Are you a Contractor?
+  </div>
+
+  <div class="card" onclick="Shoper()">
+    Are you a Shoper?
+  </div>
+
+  <div class="card" onclick="User()">
+    Are you a User?
+  </div>
+
+  <script>
+    function Contractor() {
+      confirm('Are you sure a Contractor?');
+      window.location='/myapp/login/';
+    }
+
+    function Shoper() {
+      confirm('Are you sure a Shoper?');
+       window.location='/myapp/login/';
+    }
+
+    function User() {
+      confirm('Are you sure a User?');
+       window.location='/myapp/user_login/';
+    }
+  </script>
+</body>
+</html>

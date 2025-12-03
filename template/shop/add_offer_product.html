@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Offer</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: #f8f9fa;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h3 {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #2d6a4f;
+    }
+
+    form {
+      max-width: 450px;
+      background: #fff;
+      margin: auto;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      border-color: #2d6a4f;
+      outline: none;
+      box-shadow: 0 0 6px rgba(45, 106, 79, 0.3);
+    }
+
+    button {
+      background: #2d6a4f;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+      display: block;
+      margin: auto;
+    }
+
+    button:hover {
+      background: #1b4332;
+    }
+
+    /* View button section */
+    .view-section {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .view-section a {
+      text-decoration: none;
+      background: #40916c;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: bold;
+      transition: 0.3s;
+      display: inline-block;
+    }
+
+    .view-section a:hover {
+      background: #2d6a4f;
+    }
+  </style>
+</head>
+
+<body>
+  <h3>Add Offer</h3>
+
+  <form action="/myapp/add_offer_product_post/" method="post">
+    {% csrf_token %}
+    <label for="">Offer Price:</label>
+    <input type="number" name="offer_price" required>
+
+    <label for="">Start date:</label>
+    <input type="date" name="start_date" required>
+
+    <label for="">End date:</label>
+    <input type="date" name="end_date" required>
+
+    <label for="">Offer Name:</label>
+    <input type="text" name="offer_name" required>
+
+    <label for="">Details:</label>
+    <input type="text" name="details">
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <div class="view-section">
+    <a href="/myapp/view_offer_product/">View Offer Products</a>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop Order Details</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #a8e063, #56ab2f);
+      margin: 0;
+      padding: 20px;
+      color: #081c15;
+    }
+
+    .bill-container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #2d6a4f;
+      font-size: 26px;
+    }
+
+    .bill-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #e6e6e6;
+      padding-bottom: 10px;
+    }
+
+    .bill-header div {
+      font-size: 14px;
+      color: #444;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    th {
+      background: #2d6a4f;
+      color: white;
+      font-weight: bold;
+    }
+
+    td img {
+      width: 65px;
+      height: 65px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .total-row td {
+      font-weight: bold;
+      font-size: 16px;
+      background: #e9f7ef;
+      color: #1b4332;
+    }
+
+    .thankyou {
+      text-align: center;
+      margin-top: 25px;
+      font-size: 15px;
+      font-weight: bold;
+      color: #2d6a4f;
+    }
+
+    .back-btn {
+      display: block;
+      width: fit-content;
+      margin: 25px auto 0;
+      padding: 10px 20px;
+      background: #2d6a4f;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 15px;
+      transition: background 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: #1b4332;
+    }
+  </style>
+</head>
+<body>
+  <div class="bill-container">
+    <h2>Shop Order Details</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Image</th>
+          <th>Quantity</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in data %}
+        <tr>
+          <td>{{ i.PRODUCT.item_name }}</td>
+          <td><img src="{{ i.PRODUCT.photo.url }}" alt="Product"></td>
+          <td>{{ i.quantity }}</td>
+          <td>₹{{ i.price }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <a href="/myapp/view_shop_order/" class="back-btn">← Back to Shop Orders</a>
+  </div>
+</body>
+</html>

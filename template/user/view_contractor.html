@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contractors</title>
+  <style>
+    /* Body styles */
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #a8e063, #56ab2f);
+      margin: 0;
+      padding: 0;
+      color: #081c15;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* Navigation bar styles */
+    nav {
+      background: #2d6a4f;
+      padding: 15px 0;
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      flex-wrap: wrap;
+      width: 100%;
+    }
+
+    nav li {
+      list-style: none;
+      display: inline-block;
+      position: relative;
+    }
+
+    nav li a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      padding: 8px 15px;
+      border-radius: 8px;
+      transition: 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    nav li a:hover {
+      background: #40916c;
+    }
+
+    nav li button {
+      background: #d62828;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    nav li button a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      display: block;
+    }
+
+    nav li button:hover {
+      background: #a4161a;
+    }
+
+    /* Dropdown menu */
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      background: #2d6a4f;
+      top: 100%;
+      left: 0;
+      min-width: 180px;
+      border-radius: 6px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      z-index: 10;
+      padding: 0;
+      margin: 0;
+    }
+
+    .dropdown-menu li {
+      display: block;
+      width: 100%;
+    }
+
+    .dropdown-menu li a {
+      padding: 12px 16px;
+      color: white;
+      text-align: left;
+      border-radius: 0;
+    }
+
+    .dropdown-menu li a:hover {
+      background: #40916c;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
+    /* Cart badge */
+    .cart-badge {
+      position: absolute;
+      top: -6px;
+      right: -10px;
+      background: red;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 2px 6px;
+      border-radius: 50%;
+    }
+
+    /* Page content */
+    .content {
+      width: 100%;
+      max-width: 1100px;
+      padding: 20px;
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 25px;
+      color: #1b4332;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    th,
+    td {
+      padding: 12px 15px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    th {
+      background: #2d6a4f;
+      color: #fff;
+      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+    }
+
+    tr:nth-child(even) {
+      background: #f4f4f4;
+    }
+
+    tr:hover {
+      background: #eaf4ea;
+    }
+
+    a.view-work-btn {
+      text-decoration: none;
+      background: #40916c;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 13px;
+      transition: background 0.3s;
+      display: inline-block;
+    }
+
+    a.view-work-btn:hover {
+      background: #2d6a4f;
+    }
+
+    @media (max-width: 600px) {
+      table,
+      th,
+      td {
+        font-size: 12px;
+      }
+
+      nav {
+        justify-content: center;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Include nav with exact style -->
+  {% include 'user/user_nav.html' %}
+
+  <div class="content">
+    <h2>Contractors</h2>
+
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone No</th>
+        <th>Address</th>
+        <th>Works</th>
+      </tr>
+      {% for i in data %}
+      <tr>
+        <td>{{ i.name }}</td>
+        <td>{{ i.email }}</td>
+        <td>{{ i.phone_no }}</td>
+        <td>{{ i.address }}</td>
+        <td><a href="/myapp/view_work/{{ i.id }}" class="view-work-btn">View Work</a></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+</body>
+
+</html>

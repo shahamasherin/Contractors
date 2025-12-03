@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Send Reply</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #a8e063, #56ab2f); /* green gradient */
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    form {
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      width: 400px;
+      max-width: 90%;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #1b4332;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+
+    textarea {
+      width: 85%;
+      min-height: 120px;
+      border: 2px solid #40916c;
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 15px;
+      outline: none;
+      resize: none;
+      margin: 0 auto 20px auto;
+      display: block;
+      transition: 0.3s;
+    }
+
+    textarea:focus {
+      border-color: #2d6a4f;
+      box-shadow: 0 0 6px #2d6a4f;
+    }
+
+    button {
+      background: #2d6a4f;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #40916c;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <form action="/myapp/send_reply_post/" method="post">
+    {% csrf_token %}
+    <h2>Send Reply</h2>
+    <textarea name="reply" placeholder="Write your reply here..."></textarea>
+    <button type="submit">Send</button>
+  </form>
+</body>
+</html>

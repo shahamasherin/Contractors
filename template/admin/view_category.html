@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Category</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #a8e063, #56ab2f);
+            margin: 0;
+            padding: 40px;
+            color: #081c15;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #1b4332;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        table {
+            width: 70%;
+            margin: 0 auto 30px auto;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ccc;
+            text-align: center;
+        }
+
+        th {
+            background: #2d6a4f;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background: #f1fdf1;
+        }
+
+        tr:hover {
+            background: #d8f3dc;
+        }
+
+        a {
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        a[href*="delete_category"] {
+            background: #d62828;
+            color: white;
+        }
+
+        a[href*="delete_category"]:hover {
+            background: #a4161a;
+        }
+
+        /* Add Categories button */
+        .add-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: #2d6a4f;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .add-btn:hover {
+            background: #40916c;
+        }
+    </style>
+</head>
+<body>
+   <h3>📋 View Categories</h3> 
+
+   <table>
+    <tr>
+        <th>Sl No</th>
+        <th>Category Name</th>
+        <th>Action</th>
+    </tr>
+    {% for i in data %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ i.category_name }}</td>
+        <td>
+            <a href="/myapp/delete_category/{{ i.id }}" onclick="return confirm('Are You Sure?')">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+   </table>
+
+   <a href="/myapp/add_category" class="add-btn">➕ Add Categories</a>
+</body>
+</html>

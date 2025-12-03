@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Works</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #a8e063, #56ab2f);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      color: #081c15;
+    }
+
+    nav {
+      width: 100%;
+    }
+
+    header h1 {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #1b4332;
+      margin: 30px 0 20px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .work-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+      max-width: 1100px;
+      width: 90%;
+      margin-bottom: 40px;
+    }
+
+    .work-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+      border-left: 6px solid #2d6a4f;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .work-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .work-name {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #1b4332;
+      margin-bottom: 10px;
+    }
+
+    .contractor {
+      margin-top: 10px;
+      padding: 10px;
+      background: #f6fdf8;
+      border: 1px solid #d4f1dd;
+      border-radius: 8px;
+    }
+
+    .contractor strong {
+      color: #2d6a4f;
+    }
+
+    .status {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: bold;
+      padding: 5px 12px;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+
+    .status.pending {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .status.completed {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .status.cancelled {
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    .work-date {
+      font-size: 0.8rem;
+      color: #666;
+      text-align: right;
+      margin-top: 12px;
+      font-style: italic;
+    }
+
+    .no-works {
+      text-align: center;
+      color: #fff;
+      font-weight: bold;
+      margin-top: 40px;
+      font-size: 1.1rem;
+      grid-column: 1/-1;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Include nav -->
+  {% include 'user/user_nav.html' %}
+
+  <header>
+    <h1>My Works</h1>
+  </header>
+
+  <div class="work-container">
+    {% for i in data %}
+    <div class="work-card">
+      <div class="work-name">{{ i.WORK.work_name }}</div>
+
+      <div class="status 
+          {% if i.status == 'pending' %}pending
+          {% elif i.status == 'completed' %}completed
+          {% else %}cancelled{% endif %}">
+        {{ i.status|title }}
+      </div>
+
+      <div class="work-date">{{ i.date }}</div>
+
+      <div class="contractor">
+        <strong>Contractor:</strong> {{ i.WORK.CONTRACTOR.name }} <br>
+        <strong>Phone:</strong> {{ i.WORK.CONTRACTOR.phone_no }}
+      </div>
+    </div>
+    {% empty %}
+    <p class="no-works">Request not sent</p>
+    {% endfor %}
+  </div>
+</body>
+
+</html>

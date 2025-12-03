@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Orders</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #a8e063, #56ab2f); /* green gradient */
+      margin: 0;
+      padding: 0;
+      color: #081c15; /* dark green text */
+    }
+
+    h2 {
+      text-align: center;
+      margin: 25px 0;
+      color: #1b4332; /* darker green for title */
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+
+    .orders-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .order-card {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+      padding: 20px;
+      transition: transform 0.2s ease-in-out, box-shadow 0.3s ease;
+      border: 2px solid #40916c20; /* subtle green border */
+    }
+
+    .order-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    .order-info {
+      margin-bottom: 15px;
+    }
+
+    .order-info span {
+      display: block;
+      font-size: 15px;
+      color: #344e41;
+      margin-bottom: 6px;
+    }
+
+    .status {
+      font-weight: bold;
+      padding: 5px 12px;
+      border-radius: 8px;
+      display: inline-block;
+      font-size: 14px;
+    }
+
+    .status.pending {
+      background: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeeba;
+    }
+
+    .status.completed {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .status.cancelled {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    .more-btn {
+      display: block;
+      width: fit-content;
+      margin: 15px auto 0;
+      padding: 10px 22px;
+      background: #2d6a4f;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: bold;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .more-btn:hover {
+      background: #40916c;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+{% include "user/user_home.html" %}
+
+  <h2>My Orders</h2>
+
+  <div class="orders-container">
+    {% for i in data %}
+    <div class="order-card">
+      <div class="order-info">
+        <span><strong>Date:</strong> {{ i.date }}</span>
+        <span><strong>Total Amount:</strong> ₹{{ i.total_amount }}</span>
+        <span><strong>Status:</strong> 
+          <span class="status {% if i.status == 'paid' %}pending{% elif i.status == 'Delivered' %}completed{% else %}cancelled{% endif %}">
+            {{ i.status }}
+          </span>
+        </span>
+      </div>
+      <a href="/myapp/view_order_sub/{{i.id}}" class="more-btn">More Details</a>
+    </div>
+    {% endfor %}
+  </div>
+</body>
+</html>

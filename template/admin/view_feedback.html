@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop Feedback</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #a8e063, #56ab2f);
+      margin: 0;
+      padding: 20px;
+      color: #081c15;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px 0;
+      color: white;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin: 0;
+    }
+
+    .feedback-container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .feedback-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-left: 6px solid #2d6a4f;
+    }
+
+    .feedback-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+    }
+
+    .user-name {
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: #1b4332;
+      margin-bottom: 8px;
+    }
+
+    .feedback-text {
+      font-size: 0.95rem;
+      color: #333;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .rating {
+      font-weight: bold;
+      color: #27ae60;
+      margin-bottom: 8px;
+    }
+
+    .feedback-date {
+      font-size: 0.85rem;
+      color: #555;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Customer Feedback</h1>
+  </header>
+
+  <div class="feedback-container">
+    {% for i in data %}
+    <div class="feedback-card">
+      <div class="user-name">{{ i.USER.name }}</div>
+      <div class="feedback-text">{{ i.feedback }}</div>
+      <div class="rating">Rating: {{ i.rating}}%</div>
+      <div class="feedback-date">{{ i.date }}</div>
+    </div>
+    {% endfor %}
+  </div>
+</body>
+</html>

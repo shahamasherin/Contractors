@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offer Products</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #a8e063, #56ab2f);
+      margin: 0;
+      padding: 0;
+      color: #081c15;
+    }
+
+    header {
+      text-align: center;
+      padding: 25px 10px;
+      background: #2d6a4f;
+      color: white;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+      margin-bottom: 30px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: bold;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    }
+
+    .offer-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 25px;
+      max-width: 1200px;
+      margin: 0 auto 40px;
+      padding: 0 15px;
+    }
+
+    .offer-card {
+      background: #f5f9f5;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-left: 6px solid #40916c;
+    }
+
+    .offer-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+    }
+
+    .offer-name {
+      margin: 0 0 15px;
+      font-size: 1.5rem;
+      color: #1b4332;
+      font-weight: bold;
+    }
+
+    .offer-card h4 {
+      margin: 8px 0;
+      font-size: 1rem;
+      color: #081c15;
+    }
+
+    .offer-card h4 strong {
+      color: #2d6a4f;
+    }
+
+    .price {
+      margin-top: 12px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #27ae60;
+    }
+
+    .details {
+      margin-top: 10px;
+      font-size: 0.95rem;
+      color: #333;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Available Offers</h1>
+  </header>
+
+  <div class="offer-container">
+    {% for i in data %}
+    <div class="offer-card">
+      <h2 class="offer-name">{{i.offer_name}}</h2>
+      <h4><strong>Offer Product:</strong> {{i.PRODUCT.item_name}}</h4>
+      <h4><strong>Entry Date:</strong> {{i.date_entry}}</h4>
+      <h4><strong>Start Date:</strong> {{i.start_date}}</h4>
+      <h4><strong>End Date:</strong> {{i.end_date}}</h4>
+      <h4 class="price">Offer Price: ₹{{i.offer_price}}</h4>
+      <p class="details">{{i.details}}</p>
+    </div>
+    {% endfor %}
+  </div>
+</body>
+</html>

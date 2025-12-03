@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #a8e063, #56ab2f);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-box {
+            background: #ffffff;
+            padding: 40px 30px;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+            width: 360px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .login-box h3 {
+            margin-bottom: 20px;
+            color: #2d6a4f;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .login-box label {
+            display: block;
+            text-align: left;
+            margin: 12px 0 5px;
+            font-weight: 600;
+            color: #344e41;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            outline: none;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .login-box input:focus {
+            border-color: #2d6a4f;
+            box-shadow: 0 0 8px #2d6a4f66;
+        }
+
+        .login-box button {
+            margin-top: 18px;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #56ab2f, #2d6a4f);
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .login-box button:hover {
+            background: linear-gradient(135deg, #2d6a4f, #1b4332);
+        }
+
+        .alt-links {
+            margin-top: 20px;
+        }
+
+        .alt-links a {
+            display: block;
+            margin: 8px 0;
+            text-decoration: none;
+            background: #d8f3dc;
+            padding: 10px;
+            border-radius: 10px;
+            color: #1b4332;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .alt-links a:hover {
+            background: #2d6a4f;
+            color: #fff;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <h3>Login</h3>
+        <form action="/myapp/user_login_post/" method="post">
+            {% csrf_token %}
+            <label for="">User Email:</label>
+            <input type="email" name="email" required>
+
+            <label for="">Password:</label>
+            <input type="password" name="password" required>
+
+            <button type="submit">Login</button>
+
+            <div class="alt-links">
+                <a href="/myapp/user_rgstr/">Sign up</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

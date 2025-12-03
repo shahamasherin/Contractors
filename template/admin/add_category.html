@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Categories</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #a8e063, #56ab2f);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: #081c15;
+        }
+
+        h3 {
+            font-size: 26px;
+            margin-bottom: 20px;
+            color: #1b4332;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        form {
+            background: white;
+            padding: 25px 30px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 320px;
+        }
+
+        label {
+            font-weight: 600;
+            color: #1b4332;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border: 2px solid #2d6a4f;
+            border-radius: 8px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: #40916c;
+            box-shadow: 0px 0px 6px rgba(64, 145, 108, 0.5);
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            background: #2d6a4f;
+            color: white;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #40916c;
+        }
+
+        /* Extra button for View Categories */
+        .link-btn {
+            margin-top: 20px;
+        }
+
+        .link-btn button {
+            background: #1b4332;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .link-btn button:hover {
+            background: #40916c;
+        }
+
+        .link-btn button a {
+            text-decoration: none;
+            color: white;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h3>Add Categories</h3>
+
+    <form action="/myapp/add_category_post/" method="post">
+        {% csrf_token %}
+        <label for="category">Category Name</label>
+        <input type="text" name="category_name" id="category" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <div class="link-btn">
+        <button><a href="/myapp/view_category">View Categories</a></button>
+    </div>
+</body>
+</html>

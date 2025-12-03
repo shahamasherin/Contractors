@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contractor Registration</title>
+    <style>
+        body {
+            margin: 200px;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #a8e063, #56ab2f);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 450px;
+            padding: 40px;
+            padding-top: 40px;
+        }
+
+        .register-box {
+            background: #fff;
+            padding: 39px 35px;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            margin-top: 40px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .register-box h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #2d6a4f;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .register-box label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: 600;
+            color: #344e41;
+        }
+
+        .register-box input,
+        .register-box textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            outline: none;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .register-box input:focus,
+        .register-box textarea:focus {
+            border-color: #2d6a4f;
+            box-shadow: 0 0 8px #2d6a4f66;
+        }
+
+        .register-box textarea {
+            resize: none;
+            height: 70px;
+        }
+
+        .gender-box {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .gender-box label {
+            margin: 0;
+            font-weight: normal;
+        }
+
+        .register-box button {
+            margin-top: 18px;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #56ab2f, #2d6a4f);
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .register-box button:hover {
+            background: linear-gradient(135deg, #2d6a4f, #1b4332);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="register-box">
+            <h3>Register Now</h3>
+            <form action="/myapp/cntrctr_rgstr_post/" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label for="">User Name:</label>
+                <input type="text" name="username" required>
+
+                <label for="">Contractor Name:</label>
+                <input type="text" name="cntrctr_name" required>
+
+                <label for="">Password:</label>
+                <input type="password" name="password" required>
+
+                <label for="">Email:</label>
+                <input type="email" name="email" required>
+
+                <label for="">DOB:</label>
+                <input type="date" name="dob" required>
+
+                <label for="">Gender:</label>
+                <div class="gender-box">
+                    <input type="radio" name="gender" value="Male"> <label>Male</label>
+                    <input type="radio" name="gender" value="Female"> <label>Female</label>
+                </div>
+
+                <label for="">Phone No:</label>
+                <input type="number" name="phone" required>
+
+                <label for="">Address:</label>
+                <textarea name="address" required></textarea>
+
+                <label for="">Photo:</label>
+                <input type="file" name="image" required>
+
+                <label for="">Proof:</label>
+                <input type="file" name="proof" required>
+
+                <button type="submit">Register</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

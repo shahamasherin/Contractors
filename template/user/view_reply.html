@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Complaint Replies</title>
+  <style>
+    /* Body and layout */
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #a8e063, #56ab2f);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      color: #081c15;
+    }
+
+    nav {
+      width: 100%;
+    }
+
+    header h1 {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #1b4332;
+      margin: 30px 0 20px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    }
+
+    .reply-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+      max-width: 1100px;
+      width: 90%;
+      margin-bottom: 40px;
+    }
+
+    .reply-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+      border-left: 6px solid #2d6a4f;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    .reply-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+    }
+
+    .complaint-text {
+      font-size: 0.95rem;
+      color: #444;
+      line-height: 1.5;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .reply-section {
+      margin-top: 8px;
+    }
+
+    .reply-label {
+      font-weight: bold;
+      color: #1b4332;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    .reply-text {
+      font-size: 0.95rem;
+      color: #333;
+      background: #f6fdf8;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #d4f1dd;
+    }
+
+    .status {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: bold;
+      padding: 5px 12px;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+
+    .status.pending {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .status.resolved {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .status.rejected {
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    .complaint-date {
+      font-size: 0.8rem;
+      color: #666;
+      text-align: right;
+      margin-top: 12px;
+      font-style: italic;
+    }
+
+    .no-replies {
+      text-align: center;
+      color: #fff;
+      font-weight: bold;
+      margin-top: 40px;
+      font-size: 1.1rem;
+      grid-column: 1/-1;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Include nav -->
+  {% include 'user/user_nav.html' %}
+
+  <header>
+    <h1>My Complaint Replies</h1>
+  </header>
+
+  <div class="reply-container">
+    {% for i in data %}
+    <div class="reply-card">
+      <div class="complaint-text">
+        <strong>Complaint:</strong> {{ i.complaint }}
+      </div>
+
+      <div class="reply-section">
+        <span class="reply-label">Reply:</span>
+        <div class="reply-text">
+          {{ i.reply|default:"No reply yet" }}
+        </div>
+      </div>
+
+      <div class="status 
+          {% if i.status == 'Pending' %}pending
+          {% elif i.status == 'Resolved' %}resolved
+          {% else %}rejected{% endif %}">
+        {{ i.status }}
+      </div>
+
+      <div class="complaint-date">{{ i.date }}</div>
+    </div>
+    {% empty %}
+    <p class="no-replies">No replies found.</p>
+    {% endfor %}
+  </div>
+</body>
+</html>

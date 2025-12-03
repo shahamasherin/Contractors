@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop Complaints</title>
+<style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #a8e063, #56ab2f);
+      margin: 0;
+      padding: 20px;
+      color: #081c15;
+    }
+
+    header h1 {
+      text-align: center;      /* Center heading */
+      font-size: 2rem;
+      font-weight: bold;
+      color: #1b4332;
+      margin-bottom: 30px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    }
+
+    .complaint-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .complaint-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+      border-left: 6px solid #2d6a4f;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      min-height: 130px;
+      max-height: 200px;
+      min-width: 190px;
+      max-width: 260px;
+      overflow: auto;
+    }
+
+    .complaint-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+    }
+
+    /* Standardized text for cards */
+    .user-name {
+      font-weight: 600;
+      font-size: 1.15rem;
+      color: #1b4332;
+      margin-bottom: 6px;
+    }
+
+    .complaint-text {
+      font-size: 1rem;
+      color: #333;
+      line-height: 1.6;
+      margin-bottom: 10px;
+      overflow-wrap: break-word;
+    }
+
+    .complaint-date {
+      font-size: 0.85rem;
+      color: #555;
+      text-align: right;
+      margin-bottom: 12px;
+      font-style: italic;
+    }
+
+    .reply-btn {
+      display: inline-block;
+      padding: 8px 16px;
+      background: #2d6a4f;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 8px;
+      transition: background 0.3s ease;
+    }
+
+    .reply-btn:hover {
+      background: #1b4332;
+    }
+</style>
+
+
+</head>
+<body>
+
+<header>
+  <h1>Customer Complaints</h1>
+</header>
+
+<div class="complaint-container">
+  {% for i in data %}
+  <div class="complaint-card">
+    <div class="user-name">{{ i.USER.name }}</div>
+    <div class="complaint-text">{{ i.complaint }}</div>
+    <div class="complaint-date">{{ i.date }}</div>
+    <div class="complaint-date">{{i.status}}</div>
+    <a href="/myapp/send_reply/{{ i.id }}" class="reply-btn">Reply</a>
+  </div>
+  {% endfor %}
+</div>
+
+</body>
+</html>

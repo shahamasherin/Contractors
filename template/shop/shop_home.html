@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shoper Dashboard</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #a8e063, #56ab2f);
+      margin: 0;
+      padding: 0;
+      color: #081c15;
+      text-align: center;
+    }
+
+    nav {
+      background: #2d6a4f;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+      gap: 25px;
+    }
+
+    nav ul li {
+      position: relative;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: 0.3s;
+      display: block;
+      position: relative;
+    }
+
+    nav ul li a:hover {
+      background: #40916c;
+    }
+
+    /* Red notification badge always visible */
+    .badge {
+      position: absolute;
+      top: -5px;
+      right: -10px;
+      background: #d62828; /* red background */
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 4px 7px;
+      border-radius: 50%;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      background: #2d6a4f;
+      top: 40px;
+      left: 0;
+      min-width: 160px;
+      border-radius: 6px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      z-index: 10;
+    }
+
+    .dropdown-menu li a {
+      padding: 10px 14px;
+      white-space: nowrap;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
+    .logout-btn a {
+      background: #d62828;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-weight: bold;
+      color: white;
+      transition: 0.3s;
+    }
+
+    .logout-btn a:hover {
+      background: #a4161a;
+    }
+
+    h3 {
+      text-align: center;
+      margin-top: 50px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #081c15;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="/myapp/view_offer_product/">View Offer Products</a></li>
+
+      <!-- View Orders with badge always visible -->
+      <li>
+        <a href="/myapp/view_shop_order/">View Orders
+          <span class="badge">{{ order_count|default:0 }}</span>
+        </a>
+      </li>
+
+      <!-- <li><a href="/myapp/view_review_product/">View Review Products</a></li> -->
+
+      <li class="dropdown">
+        <a href="#">Item Manager ▾</a>
+        <ul class="dropdown-menu">
+          <li><a href="/myapp/add_shop_product/">Add Products</a></li>
+          <li><a href="/myapp/view_shop_product/">View Products</a></li>
+        </ul>
+      </li>
+
+      <li><a href="#">Verify Return</a></li>
+    </ul>
+
+    <div class="logout-btn">
+      <a href="/myapp/logout/">Logout</a>
+    </div>
+  </nav>
+
+  <h3>Hi Shoper</h3>
+</body>
+</html>

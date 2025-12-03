@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Requests</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #a8e063, #56ab2f);
+            margin: 0;
+            padding: 30px;
+            color: #081c15;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1b4332;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .request-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .request-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+            border-left: 6px solid #2d6a4f;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            min-height: 150px;
+        }
+
+        .request-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+        }
+
+        .request-info {
+            margin-bottom: 15px;
+        }
+
+        .request-info span {
+            display: block;
+            font-size: 15px;
+            color: #333;
+            margin-bottom: 6px;
+        }
+
+        .user-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #1b4332;
+        }
+
+        .work-name {
+            font-weight: bold;
+            color: #2d6a4f;
+        }
+
+        .request-date {
+            font-size: 0.9rem;
+            color: #555;
+            font-style: italic;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .action-buttons a {
+            flex: 1;
+            text-align: center;
+            text-decoration: none;
+            padding: 10px 0;
+            margin: 0 5px;
+            border-radius: 10px;
+            color: #fff;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .accept-btn {
+            background: linear-gradient(135deg, #56ab2f, #2d6a4f);
+        }
+
+        .accept-btn:hover {
+            background: linear-gradient(135deg, #2d6a4f, #1b4332);
+        }
+
+        .reject-btn {
+            background: linear-gradient(135deg, #ff4d4d, #cc0000);
+        }
+
+        .reject-btn:hover {
+            background: linear-gradient(135deg, #cc0000, #800000);
+        }
+
+        .status-text {
+            display: block;
+            text-align: center;
+            padding: 10px 0;
+            font-weight: bold;
+            color: #fff;
+            border-radius: 10px;
+            background: #888;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Work Requests</h1>
+
+<div class="request-container">
+    {% for i in data %}
+    <div class="request-card">
+        <div class="request-info">
+            <span class="user-name">{{i.USER.name}}</span>
+            <span class="user-name">{{i.USER.phone_no}}</span>
+            <span class="work-name">{{i.WORK.work_name}}</span>
+            <span class="request-date">{{i.date}}</span>
+        </div>
+        {% if i.status == "pending" %}
+        <div class="action-buttons">
+            <a href="/myapp/work_request_accept/{{i.id}}" class="accept-btn">Accept</a>
+            <a href="/myapp/work_request_reject/{{i.id}}" class="reject-btn">Reject</a>
+        </div>
+        {% else %}
+        <span class="status-text">{{ i.status|capfirst }}</span>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+
+</body>
+</html>

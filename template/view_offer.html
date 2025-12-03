@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offer Details</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f9f9f9, #e3f2fd);
+      margin: 0;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .offer-card {
+      background: #fff;
+      border-radius: 15px;
+      padding: 30px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .offer-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .offer-name {
+      font-size: 2rem;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+      color: #1e3a8a; /* Standard deep blue */
+    }
+
+    h4,
+    h3 {
+      margin: 10px 0;
+      color: #333;
+    }
+
+    h4 strong {
+      color: #00796b;
+    }
+
+    .price {
+      color: #27ae60;
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  {% for data in i %}
+ 
+  <div class="offer-card">
+    <h2 class="offer-name">{{data.offer_name}}</h2>
+    <h4><strong>Offer Product:</strong> {{data.PRODUCT.item_name}}</h4>
+    <h4><strong>Entry Date:</strong> {{data.date_entry}}</h4>
+    <h4><strong>Start Date:</strong> {{data.start_date}}</h4>
+    <h4><strong>End Date:</strong> {{data.end_date}}</h4>
+    <h4 class="price">Offer Price: ₹{{data.offer_price}}</h4>
+    <h3>{{data.details}}</h3>
+  </div>
+{% empty %}
+  <div class="no-data">No offers available</div>
+{% endfor %}
+
+
+</body>
+
+</html>
+ <!-- for user and contractor -->
